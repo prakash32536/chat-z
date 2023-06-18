@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import Login from "./components/Login";
+import Chat from "./components/Chat";
+import { useState } from "react";
+import Cookies from 'universal-cookie'
+import Room from "./components/RoomPage";
+
+const cookies = new Cookies();
+
+
+export default function App() {
+  const [isAuth, setIsAuth] = useState(cookies.get('auth-token'))
+  const [room, setRoom] = useState()
+
+  const GetDataFromRoom = (data) => {
+    setRoom(data)
+  }
+
+  if (!isAuth) {
+    return (
+      <div>
+        <Login setIsAuth={setIsAuth} />
+      </div>
+    )
+  }else{
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {!room ? (
+        <div>
+          <Room onSubmit={GetDataFromRoom} />
+        </div>
+      ) : (
+        <div>
+          <Chat room = {room} />
+        </div>
+      )}
     </div>
-  );
+  )}
 }
 
-export default App;
+
+

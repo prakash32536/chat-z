@@ -1,0 +1,24 @@
+.all_chat::-webkit-scrollbar{
+    display: none;
+}
+
+@media only screen and (max-width: 350px) {
+    .user_image {
+      width: 10%;
+    }
+}
+@media only screen and (min-width: 351px) {
+    .user_image {
+      width: 7%;
+    }
+}
+@media only screen and (min-width: 651px) {
+    .user_image {
+      width: 5%;
+    }
+}
+@media only screen and (min-width: 951px) {
+    .user_image {
+      width: 3%;
+    }
+}
